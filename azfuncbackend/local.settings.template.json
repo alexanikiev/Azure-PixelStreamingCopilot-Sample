@@ -1,0 +1,17 @@
+{
+  "IsEncrypted": false,
+  "Values": {
+    "AzureWebJobsStorage": "DefaultEndpointsProtocol=https;AccountName=;AccountKey=;EndpointSuffix=core.windows.net",
+    "FUNCTIONS_WORKER_RUNTIME": "dotnet",
+    "AZUREOPENAI_ENDPOINT_URL": "",
+    "AZUREOPENAI_API_KEY": "",
+    "AZURESPEECH_SERVICE_REGION": "",
+    "AZURESPEECH_SUBSCRIPTION_KEY": "",
+    "OPENAI_ENDPOINT_URL": "",
+    "OPENAI_AUTH_TOKEN": ""
+  },
+  "Host": {
+    "LocalHttpPort": 7071,
+    "CORS": "*"
+  }
+}
