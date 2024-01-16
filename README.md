@@ -8,7 +8,7 @@ Make everything as simple as possible, but not simpler.
 
 ## Getting Started
 
-This Unreal Engine sample is intended for Unreal Engine apps packaged for Windows platform. Once packaged Unreal Engine app zip archive gets placed in Azure Blob Storage container, from which it is referenced during Azure Unreal Pixel Streaming Marketplace item deployment. This deployment results in creation of the necessary IaaS Azure Cloud infrastructure which consist of Azure Traffic Manager, Matchmaking Server(s) VMs, Signalling Server(s) VM Scale sets, etc. to support a desired number of streams in a multi-region deployment. Generative AI capabilities of Azure Open AI and optionally OpenAI are used along with Azure Speech SDK for implementing a Copilot which can hear, speak, see and interact with You in a meaningful way.
+This Unreal Engine sample is intended for Unreal Engine apps packaged for Windows platform. Once packaged Unreal Engine app zip archive gets placed in Azure Blob Storage container, from which it is referenced during Azure Unreal Pixel Streaming Marketplace item deployment. This deployment results in creation of the necessary IaaS Azure Cloud infrastructure and PaaS Azure Cloud Services which consist of Azure Traffic Manager, Matchmaking Server(s) VMs, Signalling Server(s) VM Scale sets, Azure Blob Storage, Azure Key Vault, etc. to support a desired number of streams in a multi-region deployment. Generative AI capabilities of Azure Open AI and optionally OpenAI are used along with Azure Speech SDK for implementing a Copilot which can hear, speak, see and interact with You in a meaningful way.
 
 This sample is built based on the following foundational GitHub templates and software packages:
 
@@ -43,23 +43,27 @@ Please see the list below with compatibility guidance for the versions of softwa
 | OpenAI Plus                               | https://platform.openai.com/                                                                   | GPT-4/GPT4-V |
 | Azure Unreal Pixel Streaming              | https://azuremarketplace.microsoft.com/en-us/marketplace/apps/epicgames.unreal-pixel-streaming | 4.27.3       |
 
-Please note that you will only need to install Unreal Engine 5.3 or later if you plan to create your own customizations to Unreal Engine package using Unreal Engine Blueprints, otherwise you are welcome to use already pre-packaged customized Unreal Engine Third Person Template Project [here](). This sample takes advantage of Azure Marketplace Unreal Pixel Streaming item [here](https://portal.azure.com/#create/epicgames.unreal-pixel-streamingunreal-pixel-streaming) for deploying multi-region deployment of Azure Unreal Pixel Streaming. Please see Solution Architecture diagram below for more details.
+Please note that you will only need to install Unreal Engine 5.3 or later if you plan to create your own customizations to Unreal Engine package using Unreal Engine Blueprints, otherwise you are welcome to use already pre-packaged customized Unreal Engine ThirdPerson Template Project [here](). This sample takes advantage of Azure Marketplace Unreal Pixel Streaming item [here](https://portal.azure.com/#create/epicgames.unreal-pixel-streamingunreal-pixel-streaming) for deploying multi-region deployment of Azure Unreal Pixel Streaming. Please see Solution Architecture diagram below for more details.
 
 ## Solution Architecture
 
-![Solution Architecture](https://github.com/alexanikiev/Azure-PixelStreamingCopilot-Sample/docs/images/uepixelbackend-copilot-dark.png)
+![Solution Architecture](/docs/images/uepixelbackend-copilot-dark.png)
 
 ## Installing
 
-TBD
+After you've cloned or downloaded the repository, please review Copilot related customizations done on top of [this](https://uepixelbackend.blob.core.windows.net/publicblobs/WebServers_Marketplace_4.27.3.zip) default Azure Unreal Pixel Streaming Customization Package [here]() marked with `Customization` keyword in the code. Please note that the pre-packaged customized Unreal Engine ThirdPerson Template Project file is stored with Git LFS and can be downloaded from [here]().
 
-Unreal Engine Blueprints
+Then according to customization instructions [here](https://github.com/alexanikiev/Azure-PixelStreamingCopilot-Sample/blob/main/uepixelbackend/README.txt), please optionally re-package app zip archive to accomodate for more customizations of your choice and upload the resulting zip archive into Azure Blob Storage container. In essence, customizations to Azure Unreal Pixel Streaming can be done in Inreal Engine app itself using Blueprints, web browser User Interface written using JavaScript & HTML and/or web servers (MatchMaking Server and Signalling WebRTC Server (Cirrus)) written in NodeJS. All these customizations are packages into Unreal Engine app package for convenience. Please note that if you made customizations to the web browser User Interface or NodeJS web servers, it is important to check `I have made custom modifications to the Matchmaker and Signalling web servers` checkbox when deploying Azure Unreal Pixel Streaming Marketplace item and supply your customizations in the `Source` folder in the respective package zip archive.
 
-Azure Blob Storage
+Please learn more about Unreal Engine Pixel Streaming in general [here](https://docs.unrealengine.com/5.3/en-US/pixel-streaming-in-unreal-engine/). When it comes to customizing Unreal Pixel Streaming User Interface, [this](https://docs.unrealengine.com/5.3/en-US/customizing-the-player-web-page-in-unreal-engine/) article lays an important foundation for understanding how to do it. Please note that Azure Unreal Pixel Streaming Marketplace item is compatible with Unreal Engine 4.x/5.x apps and leverages monolitic JavaScript files approach as described in `Changes from Previous Versions` section. Namely, we mean `app.js` and `webrtcplayer.js` files. Please do not confuse it with the new way of customizing User Interface using Frontend project available on GitHub [here](https://github.com/EpicGames/PixelStreamingInfrastructure/tree/master/Frontend). 
 
-Azure Function Host
+We can set up bi-directional communication between Unreal Engine app running in Azure Cloud and web browser with the help of Unreal Engine Blueprints as described [here](https://docs.unrealengine.com/5.3/en-US/interacting-with-the-pixel-streaming-system-in-unreal-engine/). Specifically, `Communicating from UE5 to the Player Page` section details how to send events from Unreal Engine app to the web browser (including complex data in form of a JSON), and `Responding to Pixel Streaming Events` section talks about sending events from the web browser to Unreal Engine app.
 
-Azure Key Vault References
+To make appropriate Unreal Engine Blueprint customizations in our ThirdPerson app template we can follow [this](https://github.com/EpicGames/PixelStreamingInfrastructure/blob/master/Frontend/Docs/Communicating%20from%20the%20Player%20Page%20to%20UE5.md) guidance for the web browser to Unreal app communication, and [this](https://github.com/EpicGames/PixelStreamingInfrastructure/blob/master/Frontend/Docs/Communicating%20from%20UE5%20to%20the%20Player%20Page.md) guidance for Unreal app to the web browser communication. Please also note that it is important to enable `AllowPixelStreamingCommands` flag while deploying Azure Unreal Pixel Streaming Marketplace item to enable such communication in general.
+
+To enable Copilot functionality leveraging Generative AI in Azure Unreal Pixel Streaming deployment we introduced an additional serverless backend in the Cloud with the help of Azure Function Host. There're dedicated functions for Web API-based integration with Azure OpenAI multi-modal models as well as a function to generate Azure Speech SDK perishable token. Azure Speech SDK is integrated directly via JavaScript CDN minified distribution bundle in the web browser and takes advantage of your device's microphone and speaker capabilities. 
+
+In order to configure Azure Function Host App Settings with secrets needed to connect to Azure OpenAI Web APIs it is our preference to use Azure Key Vault References per guidance [here](https://learn.microsoft.com/en-us/azure/app-service/app-service-key-vault-references?tabs=azure-cli#source-app-settings-from-key-vault), and set up service to service trust between Azure Function Host and Azure Key Vault based on Azure Managed Identities.
 
 ## Cloud Deployment
 
