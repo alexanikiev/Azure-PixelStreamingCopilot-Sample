@@ -1,6 +1,6 @@
 # Azure-PixelStreamingCopilot-Sample
 
-Welcome to the Azure Pixel Streaming Copilot Sample repository on GitHub. This code base written with the help of [ChatGPT](https://chat.openai.com/) and [GitHub Copilot](https://github.com/github/copilot) serves as a reference implementation of an Unreal 4.x/5.x Pixel Streaming Copilot Immersive Experience App in Microsoft Azure Cloud based on Epic Games' Unreal Pixel Streaming Technology. To gracefully and intuitively bring in Copilot capabilities it integrates with Azure Speech SDK, Azure OpenAI Generative AI models and OpenAI Generative AI models, including multi-modal GPT-4V (GPT-4 with Vision) model. It's a great example of modern innovation leveraging robust Microsoft Azure Cloud capabilities for Cloud-based GPU Compute, best practices for building full-stack Azure Cloud solution architectures for modern web applications, and streaming high definition and high quality interactive 3D content via Epic Games' Unreal Pixel Streaming Technology at real-time on-demand in the web browser of your choice (Microsoft Edge, Google Chrome, Apple Safari, etc.) on the device of your choice (PC/Mac, tablet/iPad, phone/iPhone, etc.) securely over Internet.
+Welcome to the Azure Pixel Streaming Copilot Sample repository on GitHub. This code base written with the help of [ChatGPT](https://chat.openai.com/) and [GitHub Copilot](https://github.com/features/copilot) serves as a reference implementation of an Unreal 4.x/5.x Pixel Streaming Copilot Immersive Experience App in Microsoft Azure Cloud based on Epic Games' Unreal Pixel Streaming Technology. To gracefully and intuitively bring in Copilot capabilities it integrates with Azure Speech SDK, Azure OpenAI Generative AI models and OpenAI Generative AI models, including multi-modal GPT-4V (GPT-4 with Vision) model. It's a great example of modern innovation leveraging robust Microsoft Azure Cloud capabilities for Cloud-based GPU Compute, best practices for building full-stack Azure Cloud solution architectures for modern web applications, and streaming high definition and high quality interactive 3D content via Epic Games' Unreal Pixel Streaming Technology at real-time on-demand in the web browser of your choice (Microsoft Edge, Google Chrome, Apple Safari, etc.) on the device of your choice (PC/Mac, tablet/iPad, phone/iPhone, etc.) securely over Internet.
 
 ## Motivation
 
@@ -51,9 +51,9 @@ Please note that you will only need to install Unreal Engine 5.3 or later if you
 
 ## Installing
 
-After you've cloned or downloaded the repository, please review Copilot related customizations done on top of [this](https://uepixelbackend.blob.core.windows.net/publicblobs/WebServers_Marketplace_4.27.3.zip) default Azure Unreal Pixel Streaming Customization Package [here]() marked with `Customization` keyword in the code. Please note that the pre-packaged customized Unreal Engine ThirdPerson Template Project file is stored with Git LFS and can be downloaded from [here]().
+After you've cloned or downloaded the repository, please review Copilot related customizations done on top of [this](https://uepixelbackend.blob.core.windows.net/publicblobs/WebServers_Marketplace_4.27.3.zip) default Azure Unreal Pixel Streaming Customization Package [here](https://github.com/alexanikiev/Azure-PixelStreamingCopilot-Sample/tree/main/uepixelbackend/SignallingWebServer) marked with `Customization` keyword in the code. Please note that the pre-packaged customized Unreal Engine ThirdPerson Template Project file is stored with Git LFS and can be downloaded from [here]().
 
-Then according to customization instructions [here](https://github.com/alexanikiev/Azure-PixelStreamingCopilot-Sample/blob/main/uepixelbackend/README.txt), please optionally re-package app zip archive to accomodate for more customizations of your choice and upload the resulting zip archive into Azure Blob Storage container. In essence, customizations to Azure Unreal Pixel Streaming can be done in Unreal Engine app itself using Blueprints, web browser User Interface written using JavaScript & HTML and/or web servers (MatchMaking Server and Signalling WebRTC Server (Cirrus)) written in NodeJS. All these customizations are packages into Unreal Engine app package for convenience. Please note that if you made customizations to the web browser User Interface or NodeJS web servers, it is important to check `I have made custom modifications to the Matchmaker and Signalling web servers` checkbox when deploying Azure Unreal Pixel Streaming Marketplace item and supply your customizations in the `Source` folder in the respective package zip archive.
+Then according to the customization instructions [here](https://github.com/alexanikiev/Azure-PixelStreamingCopilot-Sample/blob/main/uepixelbackend/README.txt), please optionally re-package app zip archive to accomodate for more customizations of your choice and upload the resulting zip archive into Azure Blob Storage container. In essence, customizations to Azure Unreal Pixel Streaming can be done in Unreal Engine app itself using Blueprints, web browser User Interface written using JavaScript & HTML and/or web servers (MatchMaking Server and Signalling WebRTC Server (Cirrus)) written in NodeJS. All these customizations are packages into Unreal Engine app package for convenience. Please note that if you made customizations to the web browser User Interface or NodeJS web servers, it is important to check `I have made custom modifications to the Matchmaker and Signalling web servers` checkbox when deploying Azure Unreal Pixel Streaming Marketplace item and supply your customizations in the `Source` folder in the respective package zip archive.
 
 Please learn more about Unreal Engine Pixel Streaming in general [here](https://docs.unrealengine.com/5.3/en-US/pixel-streaming-in-unreal-engine/). When it comes to customizing Unreal Pixel Streaming User Interface, [this](https://docs.unrealengine.com/5.3/en-US/customizing-the-player-web-page-in-unreal-engine/) article lays an important foundation for understanding how to do it. Please note that Azure Unreal Pixel Streaming Marketplace item is compatible with Unreal Engine 4.x/5.x apps and leverages monolitic JavaScript files approach as described in `Changes from Previous Versions` section. Namely, we mean `app.js` and `webrtcplayer.js` files. Please do not confuse it with the new way of customizing User Interface using Frontend project available on GitHub [here](https://github.com/EpicGames/PixelStreamingInfrastructure/tree/master/Frontend). 
 
@@ -78,6 +78,39 @@ For Copilot functionality we leveraged Azure OpenAI Generative AI models, namely
 While using GPT-4 model(s) quickly became ubiquotous amongst developers, we will just briefly touch upon technical aspects while using multi-modal [GPT-4V (Vision)](https://openai.com/research/gpt-4v-system-card) model. 
 
 A novel way to leverage multi-modality (text and image(s)) is to use GPT-4V (Vision) based on "screenshots" of the screen taken from a live Unreal stream and sent to Generative AI to help interpret "what Am I looking at?" in a specific context. For that we automated the process of "taking a screenshot" on the screen using JavaScript so we can send it to GPT-4V (Vision) model in its base64 representation, the results received are spoken out load using Azure Speech SDK. Please find guidance [here](https://learn.microsoft.com/en-us/azure/ai-services/openai/how-to/gpt-with-vision) on how to use GPT-4V (Vision) multi-modal model in Azure OpenAI via Web API. Alternatively (if needed) you may leverage OpenAI GPT-4V (Vision) multi-modal model via Web API as described [here](https://platform.openai.com/docs/guides/vision).
+
+Example GPT-4V (Vision) Web API request may look like the following:
+
+```json
+curl --location 'https://abc.openai.azure.com/openai/deployments/gpt-4v/chat/completions?api-version=2023-12-01-preview' \
+--header 'Content-Type: application/json' \
+--header 'api-key: xyz' \
+--data '{
+    "messages": [ 
+        {
+            "role": "system", 
+            "content": "Your Copilot configuration" 
+        },
+        {
+            "role": "user", 
+            "content": [
+                {
+                    "type": "text",
+                    "text": "Describe this picture:"
+                },
+                {
+                    "type": "image_url",
+                    "image_url": {
+                        "url": "data:image/png;base64,123"
+                    }
+                } 
+           ] 
+        }
+    ],
+    "max_tokens": 100, 
+    "stream": false 
+} '
+```
 
 ## Important Considerations
 
