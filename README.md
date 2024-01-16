@@ -53,7 +53,7 @@ Please note that you will only need to install Unreal Engine 5.3 or later if you
 
 After you've cloned or downloaded the repository, please review Copilot related customizations done on top of [this](https://uepixelbackend.blob.core.windows.net/publicblobs/WebServers_Marketplace_4.27.3.zip) default Azure Unreal Pixel Streaming Customization Package [here]() marked with `Customization` keyword in the code. Please note that the pre-packaged customized Unreal Engine ThirdPerson Template Project file is stored with Git LFS and can be downloaded from [here]().
 
-Then according to customization instructions [here](https://github.com/alexanikiev/Azure-PixelStreamingCopilot-Sample/blob/main/uepixelbackend/README.txt), please optionally re-package app zip archive to accomodate for more customizations of your choice and upload the resulting zip archive into Azure Blob Storage container. In essence, customizations to Azure Unreal Pixel Streaming can be done in Inreal Engine app itself using Blueprints, web browser User Interface written using JavaScript & HTML and/or web servers (MatchMaking Server and Signalling WebRTC Server (Cirrus)) written in NodeJS. All these customizations are packages into Unreal Engine app package for convenience. Please note that if you made customizations to the web browser User Interface or NodeJS web servers, it is important to check `I have made custom modifications to the Matchmaker and Signalling web servers` checkbox when deploying Azure Unreal Pixel Streaming Marketplace item and supply your customizations in the `Source` folder in the respective package zip archive.
+Then according to customization instructions [here](https://github.com/alexanikiev/Azure-PixelStreamingCopilot-Sample/blob/main/uepixelbackend/README.txt), please optionally re-package app zip archive to accomodate for more customizations of your choice and upload the resulting zip archive into Azure Blob Storage container. In essence, customizations to Azure Unreal Pixel Streaming can be done in Unreal Engine app itself using Blueprints, web browser User Interface written using JavaScript & HTML and/or web servers (MatchMaking Server and Signalling WebRTC Server (Cirrus)) written in NodeJS. All these customizations are packages into Unreal Engine app package for convenience. Please note that if you made customizations to the web browser User Interface or NodeJS web servers, it is important to check `I have made custom modifications to the Matchmaker and Signalling web servers` checkbox when deploying Azure Unreal Pixel Streaming Marketplace item and supply your customizations in the `Source` folder in the respective package zip archive.
 
 Please learn more about Unreal Engine Pixel Streaming in general [here](https://docs.unrealengine.com/5.3/en-US/pixel-streaming-in-unreal-engine/). When it comes to customizing Unreal Pixel Streaming User Interface, [this](https://docs.unrealengine.com/5.3/en-US/customizing-the-player-web-page-in-unreal-engine/) article lays an important foundation for understanding how to do it. Please note that Azure Unreal Pixel Streaming Marketplace item is compatible with Unreal Engine 4.x/5.x apps and leverages monolitic JavaScript files approach as described in `Changes from Previous Versions` section. Namely, we mean `app.js` and `webrtcplayer.js` files. Please do not confuse it with the new way of customizing User Interface using Frontend project available on GitHub [here](https://github.com/EpicGames/PixelStreamingInfrastructure/tree/master/Frontend). 
 
@@ -67,11 +67,17 @@ In order to configure Azure Function Host App Settings with secrets needed to co
 
 ## Cloud Deployment
 
-TBD
+This sample features One-Click Deployment for the necessary Azure Backend services. If you need to sign up for Azure Subscription please follow [this](https://azure.microsoft.com/en-us/free/) link.
+
+[![Deploy to Azure](https://aka.ms/deploytoazurebutton)](https://portal.azure.com/#create/Microsoft.Template/uri/https%3A%2F%2Fraw.githubusercontent.com%2Falexanikiev%2FAzure-PixelStreamingCopilot-Sample%2Fmain%2Fcloud%2Finfra%2Ftemplate.json)
 
 ## Azure OpenAI
 
-TBD
+For Copilot functionality we leveraged Azure OpenAI Generative AI models, namely GPT-4 and GPT-4V (Vision). GPT-4 text-only model's Chat (or Completions) endpoint was used to set up an intelligent assistant for conversations.
+
+While using GPT-4 model(s) quickly became ubiquotous amongst developers, we will just briefly touch upon technical aspects while using multi-modal [GPT-4V (Vision)](https://openai.com/research/gpt-4v-system-card) model. 
+
+A novel way to leverage multi-modality (text and image(s)) is to use GPT-4V (Vision) based on "screenshots" of the screen taken from a live Unreal stream and sent to Generative AI to help interpret "what Am I looking at?" in a specific context. For that we automated the process of "taking a screenshot" on the screen using JavaScript so we can send it to GPT-4V (Vision) model in its base64 representation, the results received are spoken out load using Azure Speech SDK. Please find guidance [here](https://learn.microsoft.com/en-us/azure/ai-services/openai/how-to/gpt-with-vision) on how to use GPT-4V (Vision) multi-modal model in Azure OpenAI via Web API. Alternatively (if needed) you may leverage OpenAI GPT-4V (Vision) multi-modal model via Web API as described [here](https://platform.openai.com/docs/guides/vision).
 
 ## Important Considerations
 
