@@ -49,6 +49,8 @@ Please note that you will only need to install Unreal Engine 5.3 or later if you
 
 ![Solution Architecture](/docs/images/uepixelbackend-copilot-dark.png)
 
+Please find more information about multi-region Azure Unreal Pixel Streaming deployment architecture [here](https://learn.microsoft.com/en-us/gaming/azure/reference-architectures/unreal-pixel-streaming-in-azure) and [here](https://docs.unrealengine.com/5.3/en-US/deploying-unreal-engine-pixel-streaming-on-azure/).
+
 ## Installing
 
 After you've cloned or downloaded the repository, please review Copilot related customizations done on top of [this](https://uepixelbackend.blob.core.windows.net/publicblobs/WebServers_Marketplace_4.27.3.zip) default Azure Unreal Pixel Streaming Customization Package [here](https://github.com/alexanikiev/Azure-PixelStreamingCopilot-Sample/tree/main/uepixelbackend/SignallingWebServer) marked with `Customization` keyword in the code. Please note that the pre-packaged customized Unreal Engine ThirdPerson Template Project file is stored with Git LFS and can be downloaded from [here]().
@@ -60,6 +62,10 @@ Please learn more about Unreal Engine Pixel Streaming in general [here](https://
 We can set up bi-directional communication between Unreal Engine app running in Azure Cloud and web browser with the help of Unreal Engine Blueprints as described [here](https://docs.unrealengine.com/5.3/en-US/interacting-with-the-pixel-streaming-system-in-unreal-engine/). Specifically, `Communicating from UE5 to the Player Page` section details how to send events from Unreal Engine app to the web browser (including complex data in form of a JSON), and `Responding to Pixel Streaming Events` section talks about sending events from the web browser to Unreal Engine app.
 
 To make appropriate Unreal Engine Blueprint customizations in our ThirdPerson app template we can follow [this](https://github.com/EpicGames/PixelStreamingInfrastructure/blob/master/Frontend/Docs/Communicating%20from%20the%20Player%20Page%20to%20UE5.md) guidance for the web browser to Unreal app communication, and [this](https://github.com/EpicGames/PixelStreamingInfrastructure/blob/master/Frontend/Docs/Communicating%20from%20UE5%20to%20the%20Player%20Page.md) guidance for Unreal app to the web browser communication. Please also note that it is important to enable `AllowPixelStreamingCommands` flag while deploying Azure Unreal Pixel Streaming Marketplace item to enable such communication in general.
+
+This is how customized ThirdPerson Character Blueprint looks like in Unreal Engine with all the necessary plumbing for Azure Unreal Pixel Streaming bi-directional communication:
+
+![ThirdPerson Character Blueprint](/docs/images/uepixelstreaming-thirdpersoncharacter-blueprint.png)
 
 To enable Copilot functionality leveraging Generative AI in Azure Unreal Pixel Streaming deployment we introduced an additional serverless backend in the Cloud with the help of Azure Function Host. There're dedicated functions for Web API-based integration with Azure OpenAI multi-modal models as well as a function to generate Azure Speech SDK perishable token. Azure Speech SDK is integrated directly via JavaScript CDN minified distribution bundle in the web browser and takes advantage of your device's microphone and speaker capabilities. 
 
@@ -81,7 +87,7 @@ A novel way to leverage multi-modality (text and image(s)) is to use GPT-4V (Vis
 
 Example GPT-4V (Vision) Web API request may look like the following:
 
-```json
+```curl
 curl --location 'https://abc.openai.azure.com/openai/deployments/gpt-4v/chat/completions?api-version=2023-12-01-preview' \
 --header 'Content-Type: application/json' \
 --header 'api-key: xyz' \
@@ -118,6 +124,7 @@ Following are important considerations on how to prepare your Azure Subscription
 
 * For leveraging Azure Cloud GPU Compute VMs your Azure Subscription will likely need to be enabled for deploying selected GPU-enabled SKUs of VMs (for example, NC or NV series) which may involve Azure Policies
 * For successfull deployment of GPU-enabled VMs as a part of Azure Unreal Pixel Streaming Marketplace item you will likely need to request a quota increase for selected SKUs in [regions]() of your choice via Azure Support
+* Please consider using [NVadsA10 v5-series](https://learn.microsoft.com/en-us/azure/virtual-machines/nva10v5-series) (Standard_NV18ads_A10_v5, Standard_NV36ads_A10_v5, etc.) VM SKUs for your Axure Unreal Pixel Streaming deployment(s)
 * Please be cognizant of the fact that even after you have successfully deployed Azure Unreal Pixel Streaming Marketplace item in your Azure Subscription there still may be some subscription level policies that kick off afterwards and change initial configuration (for example, networking setup per corporate security), thus you may need to re-adjust some configurations later
 * Please know that Azure VMs deployed by Azure Unreal Pixel Streaming Marketplace item inherit VM Extension(s) which may define behaviors like auto shut-down, etc. which you may want to adjust after initial deployment
 * Please note that if connected to corporate network(s) your corporate networking configuration may block WebRTC traffic and be unable to do NAT (Network Address Translation), thus you may need to use VPN(s) as a workaround

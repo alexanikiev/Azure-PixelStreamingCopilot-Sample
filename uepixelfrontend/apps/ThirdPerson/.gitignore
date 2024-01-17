@@ -1,0 +1,34 @@
+# Unreal Engine generated files
+DerivedDataCache/
+Intermediate/
+Saved/
+
+# Compiled binaries
+Binaries/
+
+# Logs
+*.log
+
+# Build products
+*.dll
+*.exe
+*.pdb
+
+# Generated Visual Studio files
+.vs/
+*.sln
+*.suo
+*.vcxproj
+*.vcxproj.filters
+*.vcxproj.user
+
+# Windows generated files
+Desktop.ini
+Thumbs.db
+
+# macOS generated files
+.DS_Store
+
+# Crash reports
+*.dmp
+*.mdmp
