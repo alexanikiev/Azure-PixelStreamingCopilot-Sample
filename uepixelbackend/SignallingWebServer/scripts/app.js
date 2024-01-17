@@ -5,6 +5,7 @@ const LATEST_STATUS_TEXT = "Latest Status";
 const UNREAL_COMMAND_TEXT = "Unreal command sent.";
 const WEB_API_COMMAND_TEXT = "Please wait...";
 
+const WEBTOUE_COMMAND = "WebToUE";
 const RESTART_EXPERIENCE_COMMAND = "YourWebSiteCommand1";
 const TOGGLE_VIEW_OLD_COMMAND = "YourWebSiteCommand2";
 const TOGGLE_VIEW_NEW_COMMAND = "YourWebSiteCommand3";
@@ -12,7 +13,9 @@ const EXTERIOR_POINT_COMMAND = "YourWebSiteCommand4";
 const INTERIOR_POINT_COMMAND = "YourWebSiteCommand5";
 const UNREAL_TAKEPHOTO_COMMAND = "YourUnrealAppCommand1";
 const UNREAL_ASKCOPILOT_COMMAND = "YourUnrealAppCommand2";
+const UNREAL_UETOWEB_COMMAND = "UEToWeb";
 
+const WEBSITE_BUTTON_ID = "website-button";
 const RESTART_EXPERIENCE_BUTTON_ID = "restart-experience-button";
 const TOGGLE_VIEW_CHECKBOX_ID = "toggle-view-tgl";
 const EXTERIOR_POINT_BUTTON_ID = "exterior-button";
@@ -378,12 +381,18 @@ function setupCheckboxEvent(checkboxId, action) {
 }
 
 function setupHtmlEventsExperience() {
+  setupButtonEvent('website-button', webSiteCommand);
   setupButtonEvent('restart-experience-button', restartExperience);
   setupCheckboxEvent('toggle-view-tgl', toggleView);
   setupButtonEvent('exterior-button', exteriorPoint);
   setupButtonEvent('interior-button', interiorPoint);
   setupButtonEvent('talk-copilot-button', talkToCopilot);
   setupButtonEvent('explain-copilot-button', explainCopilot);
+}
+
+function webSiteCommand() {
+  // Unreal command
+  startUnrealCommand(WEBTOUE_COMMAND, WEBSITE_BUTTON_ID);
 }
 
 function restartExperience() {
@@ -2160,6 +2169,7 @@ function onExpandOverlay_Click( /* e */) {
 
 // Customization Start
 async function handleUnrealResponse(data) {
+  /*
   if (typeof data !== 'string') {
     console.error('Invalid data type for JSON parsing');
     return;
@@ -2186,20 +2196,26 @@ async function handleUnrealResponse(data) {
   }
 
   processUnrealCommand(command);
+  */
+
+  processUnrealCommand(data);
 }
 
 async function processUnrealCommand(command) {
   switch (command) {
     case UNREAL_TAKEPHOTO_COMMAND:
-        console.log(UNREAL_TAKEPHOTO_COMMAND);
-        await startWebApiCommand(EXPLAIN_COPILOT_BUTTON_ID, true);
-        break;
+      console.log(UNREAL_TAKEPHOTO_COMMAND);
+      await startWebApiCommand(EXPLAIN_COPILOT_BUTTON_ID, true);
+      break;
     case UNREAL_ASKCOPILOT_COMMAND:
-        console.log(UNREAL_ASKCOPILOT_COMMAND);
-        await startWebApiCommand(TALK_COPILOT_BUTTON_ID, false);
-        break;
+      console.log(UNREAL_ASKCOPILOT_COMMAND);
+      await startWebApiCommand(TALK_COPILOT_BUTTON_ID, false);
+      break;
+    case UNREAL_UETOWEB_COMMAND:
+      console.log(UNREAL_UETOWEB_COMMAND);
+      break; 
     default:
-        console.error('Unknown command:', command);
+      console.error('Unknown command:', command);
   }
 }
 
