@@ -2,7 +2,7 @@
 
 ## Important Update
 
-Per [Pixel Streaming in Azure](https://github.com/Azure/Unreal-Pixel-Streaming), Azure Marketplace deployment item for Azure Unreal Pixel Streaming has been in June 2024, and Epic Games has open sourced the solution [here](https://github.com/ue4plugins/UnrealPixelStreamingOnAzure).
+Per [Pixel Streaming in Azure](https://github.com/Azure/Unreal-Pixel-Streaming), Azure Marketplace deployment item for Azure Unreal Pixel Streaming has been deprecated in June 2024, and Epic Games has open sourced the solution [here](https://github.com/ue4plugins/UnrealPixelStreamingOnAzure).
 
 ## Welcome
 
