@@ -1,5 +1,11 @@
 # Azure-PixelStreamingCopilot-Sample
 
+## Important Update
+
+Per [Pixel Streaming in Azure](https://github.com/Azure/Unreal-Pixel-Streaming), Azure Marketplace deployment item for Azure Unreal Pixel Streaming has been in June 2024, and Epic Games has open sourced the solution [here](https://github.com/ue4plugins/UnrealPixelStreamingOnAzure).
+
+## Welcome
+
 Welcome to the Azure Pixel Streaming Copilot Sample repository on GitHub. This code base written with the help of [ChatGPT](https://chat.openai.com/) and [GitHub Copilot](https://github.com/features/copilot) serves as a reference implementation of an Unreal 4.x/5.x Pixel Streaming Copilot Immersive Experience App in Microsoft Azure Cloud based on Epic Games' Unreal Pixel Streaming Technology. To gracefully and intuitively bring in Copilot capabilities it integrates with Azure Speech SDK, Azure OpenAI Generative AI models and OpenAI Generative AI models, including multi-modal GPT-4V (GPT-4 with Vision) model. It's a great example of modern innovation leveraging robust Microsoft Azure Cloud capabilities for Cloud-based GPU Compute, best practices for building full-stack Azure Cloud solution architectures for modern web applications, and streaming high definition and high quality interactive 3D content via Epic Games' Unreal Pixel Streaming Technology at real-time on-demand in the web browser of your choice (Microsoft Edge, Google Chrome, Apple Safari, etc.) on the device of your choice (PC/Mac, tablet/iPad, phone/iPhone, etc.) securely over Internet.
 
 ## Motivation
