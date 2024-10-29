@@ -91,9 +91,67 @@ Attention: This section is still under construction, please check back later. At
 
 [![Deploy to Azure](https://aka.ms/deploytoazurebutton)](https://portal.azure.com/#create/Microsoft.Template/uri/https%3A%2F%2Fraw.githubusercontent.com%2Falexanikiev%2FAzure-PixelStreamingCopilot-Sample%2Fmain%2Fcloud%2Finfra%2Ftemplate.json)
 
+## AIC (or CIA) Framework: Availability, Integrity, Confidentiality 
+
+1. Availability: Availability ensures that the gaming platform and its services are available to users whenever needed. High availability is critical for online gaming platforms, as downtime can lead to a poor user experience, frustration among players, and financial loss. To support availability, systems must be designed to handle high volumes of traffic, resist and recover from DDoS (Distributed Denial of Service) attacks, and employ redundant infrastructure to minimize downtime.  
+2. Integrity: Integrity involves maintaining the accuracy and reliability of data and ensuring that it is not tampered with. In online gaming, integrity ensures that game data, user progress, in-game assets, and financial transactions are protected from unauthorized alterations. Mechanisms like cryptographic hashes, digital signatures, and secure and resilient databases are employed to safeguard data integrity. Ensuring integrity also involves protecting the game's logic from manipulation, cheating, and exploits that could undermine the fairness and competitive balance of the game.  
+3. Confidentiality: Confidentiality focuses on ensuring that sensitive information is accessible only to authorized individuals. In the context of online gaming, confidentiality means protecting user data, such as personal information, payment details, chat logs, and gaming habits, from unauthorized access and disclosure. Techniques such as encryption (both at rest and in transit), strong authentication methods, and access control mechanisms are essential for maintaining confidentiality. 
+
+## Security
+
+Security Checklist Outline:  
+1. Infrastructure Security 
+2. Application Security 
+3. Network Security 
+4. Data Security 
+5. Identity and Access Management  
+6. Monitoring and Incident Response 
+7. Compliance and Regulatory 
+8. User Education and Awareness 
+
+Detailed Checklist:
+1. Infrastructure Security:  
+- Secure the underlying Azure Cloud infrastructure.  
+- Implement strict access controls and network segmentation.  
+- Harden operating systems and services against vulnerabilities.  
+2. Application Security:  
+- Conduct thorough security assessments, including penetration testing and vulnerability scanning, on the Unreal Pixel Streaming application.  
+- Implement secure coding practices and conduct code reviews focused on security.  
+- Use Web Application Firewalls (WAF) to protect against common web vulnerabilities.  
+- Ensure secure implementation of WebRTC to prevent eavesdropping and data tampering. 
+3. Network Security:  
+- Encrypt all data in transit using strong encryption protocols (e.g., TLS for web traffic).  
+- Deploy DDoS protection mechanisms to mitigate the risk of denial-of-service attacks.  
+- Implement network monitoring to detect and respond to suspicious activities. 
+- Implement least privilege controls to limit available ports and protocols to only those necessary to run Pixel streaming. Between external environments and between internal subnets. 
+4. Data Security:  
+- Encrypt sensitive data at rest, including player information and payment details.  
+- Implement robust data backup and recovery procedures.  
+- Ensure proper data retention policies are in place and followed. 
+5. Identity and Access Management:  
+- Implement strong authentication mechanisms, including multi-factor authentication for users and administrators.  
+- Enforce least privilege access to minimize exposure of sensitive systems and data.  
+- Manage user sessions securely, with timeouts and re-authentication where necessary.  
+6. Monitoring and Incident Response:  
+- Deploy a comprehensive monitoring solution to log and analyze events across the platform.  
+- Establish a 24/7 incident response team capable of responding to security incidents swiftly.  
+- Test incident response plans to ensure effectiveness. 
+7. Compliance and Regulatory:  
+- Adhere to relevant international and local regulations, such as GDPR for data protection in Europe.  
+- Ensure compliance with industry standards, such as ISO/IEC 27001 for information security management if necessary.  
+- Undergo third-party security assessments and audits if necessary.  
+8. User Education and Awareness:  
+- Educate users on secure practices.  
+- Provide clear guidelines and support for reporting suspicious activities or security concerns.
+
 ## Next Steps
 
 This minimalistic template may be a great jump start for your own Azure Unreal Pixel Streaming project and the possibilities from now on are truly endless.
+
+Please consider these critical Security Hardening measures to take this minimalistic template forward:
+1. Implement Application Gateway / WAF (Web Application Firewall) which includes protection from DDOS for Matchmaking Servers and Signaling Servers (Cirrus) 
+2. Limit TCP communication from Signaling Servers (Cirrus) from only Matchmaking Servers by configuring up NSG (Network Security Groups) rules. _Note: Cannot be implemented at the UDP layer._ 
+3. Implement more robust Authentication mechanism. _Note: The current authentication using hashed passwords stored in Azure Blob Storage is too basic for Production, Security and Scale._  
 
 ## Future Updates
 
