@@ -97,19 +97,7 @@ Attention: This section is still under construction, please check back later. At
 2. Integrity: Integrity involves maintaining the accuracy and reliability of data and ensuring that it is not tampered with. In online gaming, integrity ensures that game data, user progress, in-game assets, and financial transactions are protected from unauthorized alterations. Mechanisms like cryptographic hashes, digital signatures, and secure and resilient databases are employed to safeguard data integrity. Ensuring integrity also involves protecting the game's logic from manipulation, cheating, and exploits that could undermine the fairness and competitive balance of the game.  
 3. Confidentiality: Confidentiality focuses on ensuring that sensitive information is accessible only to authorized individuals. In the context of online gaming, confidentiality means protecting user data, such as personal information, payment details, chat logs, and gaming habits, from unauthorized access and disclosure. Techniques such as encryption (both at rest and in transit), strong authentication methods, and access control mechanisms are essential for maintaining confidentiality. 
 
-## Security
-
-Security Checklist Outline:  
-1. Infrastructure Security 
-2. Application Security 
-3. Network Security 
-4. Data Security 
-5. Identity and Access Management  
-6. Monitoring and Incident Response 
-7. Compliance and Regulatory 
-8. User Education and Awareness 
-
-Detailed Checklist:
+## Security Checklist
 1. Infrastructure Security:  
 - Secure the underlying Azure Cloud infrastructure.  
 - Implement strict access controls and network segmentation.  
